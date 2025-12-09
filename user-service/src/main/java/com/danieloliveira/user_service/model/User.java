@@ -8,12 +8,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
+@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "user")
+@Table(name = "tb_user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,9 +30,17 @@ public class User {
     @Column(nullable = false)
     private LocalDate createdAt;
 
+    @Column(nullable = false)
+    private LocalDate updatedAt;
+
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDate.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDate.now();
     }
 
     @Override
