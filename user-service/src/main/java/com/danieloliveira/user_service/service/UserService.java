@@ -15,22 +15,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final RepositoryMethodInvocationListener repositoryMethodInvocationListener;
 
-    private User createUser(UserDto userDto) {
+    public User createUser(UserDto userDto) {
         User user = toUser(userDto);
         return userRepository.save(user);
     }
 
-    private User getUserById(String id) {
+    public User getUserById(String id) {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
-    private User updateUser(String id, UserDto userDto) {
+    public User updateUser(String id, UserDto userDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
         updateUserEntity(user, userDto);
         return userRepository.save(user);
     }
 
-    private void deleteUser(String id) {
+    public void deleteUser(String id) {
         userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
         userRepository.deleteById(id);
     }
