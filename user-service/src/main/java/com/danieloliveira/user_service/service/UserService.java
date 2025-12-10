@@ -5,7 +5,6 @@ import com.danieloliveira.user_service.model.User;
 import com.danieloliveira.user_service.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.core.support.RepositoryMethodInvocationListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final RepositoryMethodInvocationListener repositoryMethodInvocationListener;
 
     public User createUser(UserDto userDto) {
         User user = toUser(userDto);
