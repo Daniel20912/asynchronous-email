@@ -84,6 +84,8 @@ services:
       - asynchronous-email
     environment:
       - KAFKA_BROKER=kafka:29092
+    env_file:
+      - .env
 
 
 networks:
