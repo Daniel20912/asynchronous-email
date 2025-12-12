@@ -1,17 +1,18 @@
 package com.danieloliveira.email_service.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
-public class EmailService {
+public class EmailSender {
 
+    private static final Logger log = LoggerFactory.getLogger(EmailSender.class);
     private final JavaMailSender javaMailSender;
 
     @Value("${spring.mail.username}")
@@ -31,7 +32,7 @@ public class EmailService {
             log.info("Email sent successfully");
 
         } catch (Exception e) {
-            log.error("Email sent failed: {}", e.getMessage());
+            log.error("Email sent failed");
         }
     }
 }
