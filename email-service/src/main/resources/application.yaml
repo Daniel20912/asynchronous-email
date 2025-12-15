@@ -2,6 +2,16 @@ spring:
   application:
     name: email-service
 
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+    topic:
+      user-created-v1: user-created-v1
+    consumer:
+      group-id: email-group
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
   mail:
     host: smtp.gmail.com
     port: 587
@@ -13,3 +23,9 @@ spring:
           auth: true
           starttls:
             enable: true
+
+  logging:
+    level:
+      org:
+        apache:
+          kafka: OFF
