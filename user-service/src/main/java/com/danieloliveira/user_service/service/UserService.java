@@ -1,6 +1,7 @@
 package com.danieloliveira.user_service.service;
 
 import com.danieloliveira.user_service.dto.UserDto;
+import com.danieloliveira.user_service.kafka.KafkaProducer;
 import com.danieloliveira.user_service.model.User;
 import com.danieloliveira.user_service.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -12,10 +13,13 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final KafkaProducer producer;
 
     public User createUser(UserDto userDto) {
         User user = toUser(userDto);
-        return userRepository.save(user);
+        userRepository.save(user);
+        producer.sendMessage(userDto);
+        return user;
     }
 
     public User getUserById(String id) {

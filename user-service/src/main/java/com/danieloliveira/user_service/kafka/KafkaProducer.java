@@ -21,6 +21,7 @@ public class KafkaProducer {
         try {
             log.info("Sending message to topic: {}", userCreatedTopic);
             kafkaTemplate.send(userCreatedTopic, userDto);
+            log.info("Message sent to topic: {}", userCreatedTopic);
         } catch (Exception e) {
             log.error("Error sending message to topic: {}", userCreatedTopic, e);
         }
