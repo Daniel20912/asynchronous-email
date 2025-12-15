@@ -1,4 +1,4 @@
-package com.danieloliveira.email_service.kafka;
+package com.danieloliveira.email_service.kafka.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
