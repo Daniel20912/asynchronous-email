@@ -13,6 +13,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.value.default.type: com.danieloliveira.email_service.event.UserCreatedEvent
+        spring.json.trusted.packages: "*"
 
 
   mail:

@@ -1,6 +1,5 @@
 package com.danieloliveira.user_service.kafka;
 
-import com.danieloliveira.user_service.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,15 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaProducer {
 
-    private final KafkaTemplate<String, UserDto> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Value("${spring.kafka.topic.user-created-v1}")
     private String userCreatedTopic;
 
-    public void sendMessage(UserDto userDto) {
+    public void sendMessage(String payload) {
         try {
             log.info("Sending message to topic: {}", userCreatedTopic);
-            kafkaTemplate.send(userCreatedTopic, userDto);
+            kafkaTemplate.send(userCreatedTopic, payload);
             log.info("Message sent to topic: {}", userCreatedTopic);
         } catch (Exception e) {
             log.error("Error sending message to topic: {}", userCreatedTopic, e);
